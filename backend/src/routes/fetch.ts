@@ -33,7 +33,7 @@ router.get('/', fetchLimiter, async (req: Request, res: Response) => {
       signal: controller.signal,
       headers: {
         'User-Agent':
-          'Feedora-RSS-Reader/1.0 (Privacy-First Offline Reader; +https://github.com/feedora/reader)',
+          'IncogniRead-RSS-Reader/1.0 (Privacy-First Offline Reader; +https://github.com/incogniread/reader)',
         Accept:
           'application/rss+xml, application/atom+xml, application/xml, text/xml, */*',
       },
@@ -62,7 +62,7 @@ router.get('/', fetchLimiter, async (req: Request, res: Response) => {
 
     res.setHeader('Content-Type', contentType);
     res.setHeader('Cache-Control', 'public, max-age=300, stale-while-revalidate=600');
-    res.setHeader('X-Feedora-Proxy', 'SSRF-Protected');
+    res.setHeader('X-IncogniRead-Proxy', 'SSRF-Protected');
     res.status(200).send(text);
   } catch (err: any) {
     if (err.name === 'AbortError') {

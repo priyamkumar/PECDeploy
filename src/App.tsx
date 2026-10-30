@@ -7,7 +7,6 @@ import { TelegraphTicker } from './components/layout/TelegraphTicker';
 import { InspectableNewspaperHero } from './components/feed/InspectableNewspaperHero';
 import { UnifiedTimeline } from './components/feed/UnifiedTimeline';
 import { ReaderView } from './components/feed/ReaderView';
-import { FloatingAudioPlayer } from './components/audio/FloatingAudioPlayer';
 import { AddFeedModal } from './components/feed/AddFeedModal';
 import { AnonymousDiscovery } from './components/discovery/AnonymousDiscovery';
 import { useFeeds } from './context/FeedContext';
@@ -149,15 +148,12 @@ export const App: React.FC = () => {
           )}
         </main>
 
-        {/* Right Column: Audio Queue & Gazette Briefs (Desktop >= 1280px) */}
+        {/* Right Column: The Gazette Discovery Briefs (Desktop >= 1280px) */}
         <RightPanel />
       </div>
 
       {/* Page 2: Dedicated Column Reader View (`/read/:id`) */}
       {readingArticle && <ReaderView onBack={() => navigate('/')} />}
-
-      {/* Persistent Floating Audio Narration Player */}
-      <FloatingAudioPlayer />
 
       {/* Add Feed Modal */}
       <AddFeedModal

@@ -47,7 +47,7 @@ app.use('/api/', apiLimiter);
 
 // ─── Health Check ───────────────────────────────────────────────────────────
 app.get('/health', (_req, res) => {
-  res.json({ status: 'ok', service: 'feedora-backend', timestamp: new Date().toISOString() });
+  res.json({ status: 'ok', service: 'incogniread-backend', timestamp: new Date().toISOString() });
 });
 
 // ─── API Routes ─────────────────────────────────────────────────────────────
@@ -64,7 +64,7 @@ app.use(errorHandler);
 async function bootstrap() {
   await connectDB();
   app.listen(PORT, () => {
-    console.log(`[Server] Feedora backend running on http://localhost:${PORT}`);
+    console.log(`[Server] IncogniRead backend running on http://localhost:${PORT}`);
     console.log(`[Server] Allowed CORS origins: ${allowedOrigins.join(', ')}`);
   });
 }

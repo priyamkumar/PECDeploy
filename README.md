@@ -1,11 +1,11 @@
-# Feedora — Privacy-First Offline-First RSS Reader with Interactive TTS Narration
+# IncogniRead — The Anonymous Editorial & Small Web Dispatch
 
-Feedora is an offline-first, client-parsed RSS and Atom feed reader featuring:
+IncogniRead is an offline-first, client-parsed broadsheet newspaper and RSS reader featuring:
 - **Client-Side Engine**: In-browser XML parsing via `fast-xml-parser`, article readability extraction, and strict `DOMPurify` HTML sanitization.
-- **Offline Storage**: Persistent IndexedDB cache for feeds, articles, read states, and audio playback positions using `idb`.
-- **Feedora Audio (TTS)**: Interactive Web Speech narration engine with persistent floating audio player, ±10s skip, speed rates (0.75x–2.0x), and real-time synchronized paragraph highlighting in Reader View.
+- **Offline Storage**: Persistent IndexedDB cache for feeds, articles, and read states using `idb`.
+- **Editorial Broadsheet Design**: Modeled after traditional broadsheets with classic editorial serif typography, dual-column reading, drop-caps, and real-world editorial photography.
 - **Server Routes & SSRF Defense**: `/api/fetch` CORS relay protected against SSRF (blocking loopback, RFC1918, link-local, and cloud metadata IPs) + `/api/discovery` anonymous co-subscription graph using salted SHA-256 IP hashing.
-- **Design Aesthetic**: Dark glassmorphism (`bg-slate-950`, `bg-slate-900/60`, `backdrop-blur-xl`), Amber Gold `#F59E0B` active/RSS indicators, and Emerald Green `#10B981` audio playback/security badges.
+- **Design Aesthetic**: Aged Broadsheet (`#F4F1EA`) and Midnight Press (`#0B0C0E`) high-contrast palettes with 3D tactile theme toggles.
 
 ---
 
@@ -20,7 +20,6 @@ flowchart TD
         Readability["Readability & Paragraph Tokenizer"]
         Sanitizer["DOMPurify HTML Whitelist Sanitizer"]
         IDB[("IndexedDB (idb Storage)")]
-        Audio["Feedora Audio Engine (Web Speech TTS)"]
     end
 
     subgraph ServerlessRoutes["Server Routes & Security (Same App)"]
@@ -32,7 +31,6 @@ flowchart TD
         WebFeeds["External Blogs, Substack, GitHub, Medium"]
     end
 
-    User --> Audio
     User --> Parser
     Parser --> CORSProxy
     CORSProxy -->|SSRF Check Passed| WebFeeds
@@ -41,22 +39,18 @@ flowchart TD
     Readability --> Sanitizer
     Sanitizer --> IDB
     IDB --> User
-    Audio -->|Sync Paragraph Highlight| User
     User --> Discovery
 ```
 
 ---
 
-## 🚀 Running Feedora
+## 🚀 Running IncogniRead
 
 ```powershell
-# 1. Enter the project folder
-cd "C:\Users\DELL\.gemini\antigravity\scratch\feedora-app"
-
-# 2. Install dependencies
+# 1. Install dependencies
 npm install
 
-# 3. Launch Vite development server
+# 2. Launch Vite development server
 npm run dev
 ```
 

@@ -119,7 +119,7 @@ export const SplineHero: React.FC<SplineHeroProps> = ({ onOpenAddFeed, onExplore
               <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-amber-500/20 via-orange-500/20 to-emerald-500/20 blur-2xl animate-pulse" />
               <div className="h-36 w-36 rounded-3xl border border-amber-500/40 bg-slate-900/80 backdrop-blur-xl flex flex-col items-center justify-center shadow-2xl shadow-amber-500/20 transform hover:rotate-6 transition-transform duration-500">
                 <Rss className="h-10 w-10 text-amber-400 animate-pulse" />
-                <span className="text-[10px] font-mono font-bold text-slate-300 mt-2">FEEDORA 3D</span>
+                <span className="text-[10px] font-mono font-bold text-slate-300 mt-2">INCOGNIREAD 3D</span>
               </div>
               <div className="absolute inset-0 rounded-full border border-dashed border-amber-500/30 animate-[spin_15s_linear_infinite]" />
             </div>

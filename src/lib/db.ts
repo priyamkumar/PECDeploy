@@ -33,7 +33,7 @@ interface IncogniReadDB extends DBSchema {
   };
 }
 
-const DB_NAME = 'feedora_offline_v1';
+const DB_NAME = 'incogniread_offline_v1';
 const DB_VERSION = 1;
 
 let dbPromise: Promise<IDBPDatabase<IncogniReadDB>> | null = null;

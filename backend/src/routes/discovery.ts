@@ -70,7 +70,7 @@ const DISCOVERY_GRAPH: CoSubscriptionEdge[] = [
 ];
 
 function hashIp(ip: string): string {
-  const salt = process.env.IP_HASH_SALT || 'feedora-privacy-salt-2024';
+  const salt = process.env.IP_HASH_SALT || 'incogniread-privacy-salt-2024';
   return crypto.createHmac('sha256', salt).update(ip).digest('hex').slice(0, 16);
 }
 

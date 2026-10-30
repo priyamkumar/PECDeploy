@@ -1,6 +1,6 @@
-# Feedora Backend
+# IncogniRead Backend
 
-Node.js + Express + MongoDB API server for the Feedora RSS reader app.
+Node.js + Express + MongoDB API server for the IncogniRead broadsheet reader app.
 
 ## Prerequisites
 
@@ -21,11 +21,11 @@ npm run dev     # Hot-reload dev server on port 3000
 
 | Variable | Default | Description |
 |---|---|---|
-| `MONGODB_URI` | `mongodb://localhost:27017/feedora_db` | MongoDB connection string |
+| `MONGODB_URI` | `mongodb://localhost:27017/incogniread_db` | MongoDB connection string |
 | `PORT` | `3000` | Backend server port |
 | `ALLOWED_ORIGINS` | `http://localhost:3001,http://localhost:5173` | CORS-allowed frontend origins |
 | `NODE_ENV` | `development` | Environment |
-| `IP_HASH_SALT` | `feedora-privacy-salt-2024` | Salt for anonymous IP hashing in discovery |
+| `IP_HASH_SALT` | `incogniread-privacy-salt-2024` | Salt for anonymous IP hashing in discovery |
 
 ## Running Both Frontend and Backend
 
@@ -33,7 +33,7 @@ In two separate terminals:
 
 ```bash
 # Terminal 1 – Backend (port 3000)
-npm run backend          # from feedora-app root
+npm run backend          # from project root
 
 # Terminal 2 – Frontend (port 3001, proxies /api/* → port 3000)
 npm run dev

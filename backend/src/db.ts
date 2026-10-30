@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/feedora_db';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/incogniread_db';
 
 export async function connectDB(): Promise<void> {
   try {

@@ -1,7 +1,7 @@
 {
-  "name": "feedora-backend",
+  "name": "incogniread-backend",
   "version": "1.0.0",
-  "description": "Feedora Node.js + MongoDB backend API",
+  "description": "IncogniRead Node.js + MongoDB backend API",
   "main": "dist/app.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/app.ts",

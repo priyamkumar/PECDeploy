@@ -1,15 +1,10 @@
 import React from 'react';
 import { Article } from '../../types';
 import { useFeeds } from '../../context/FeedContext';
-import { useAudio } from '../../context/AudioContext';
 import { timeAgo } from '../../lib/utils';
 import {
-  Headphones,
   Bookmark,
   Clock,
-  Play,
-  Pause,
-  Plus,
   BookOpen,
   Sparkles,
 } from 'lucide-react';
@@ -23,31 +18,11 @@ export interface ArticleCardProps {
 
 export const ArticleCard: React.FC<ArticleCardProps> = ({ article, isLeadStory = false }) => {
   const { setReadingArticle, toggleBookmark } = useFeeds();
-  const { currentArticle, playbackState, playArticle, togglePlayPause, addToQueue } = useAudio();
-
-  const isCurrentAudio = currentArticle?.id === article.id;
-  const isAudioPlaying = isCurrentAudio && playbackState === 'playing';
   const editorialImg = getEditorialImageForArticle(article);
 
   const handleOpenReader = () => {
     playTactileClick();
     setReadingArticle(article);
-  };
-
-  const handleToggleTTS = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    playTactileClick();
-    if (isCurrentAudio) {
-      togglePlayPause();
-    } else {
-      playArticle(article);
-    }
-  };
-
-  const handleQueue = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    playChimeSuccess();
-    addToQueue(article);
   };
 
   const handleBookmark = (e: React.MouseEvent) => {
@@ -83,7 +58,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ article, isLeadStory =
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
 
-        {/* Lead Story Badge or Dateline Stamp */}
+        {/* Lead Story Badge or Unread Dot */}
         <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5">
           {isLeadStory ? (
             <span className="bg-[#E6AF2E] text-[#0A0A0A] px-2 py-0.5 rounded text-[9px] font-mono font-bold tracking-wider uppercase shadow-md flex items-center gap-1">
@@ -148,62 +123,29 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ article, isLeadStory =
 
         {/* Bottom Action Footer with 3D Tactile Buttons */}
         <div className="flex items-center justify-between pt-3 border-t border-[#D5CFBE]/70 dark:border-[#2A2E35] text-xs">
-          <div className="flex items-center gap-2">
-            {/* Audio TTS Action Button */}
-            <button
-              onClick={handleToggleTTS}
-              aria-label={isAudioPlaying ? 'Pause narration' : 'Listen to story'}
-              className={`btn-press-3d flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-medium tabular-nums uppercase tracking-wider transition-all ${
-                isAudioPlaying
-                  ? 'bg-[#047857] dark:bg-[#38D489] text-white dark:text-[#0B0C0E] border-b-[3px] border-[#02402e] dark:border-[#21a364] shadow-sm'
-                  : 'bg-white dark:bg-[#1D2025] text-[#0A0A0A] dark:text-[#F5F5F0] border border-[#D5CFBE] dark:border-[#2A2E35] border-b-[3px] border-b-[#B4ACA0] dark:border-b-black hover:text-[#B45309] dark:hover:text-[#E6AF2E]'
-              }`}
-            >
-              {isAudioPlaying ? (
-                <>
-                  <Pause className="h-3.5 w-3.5 fill-current" />
-                  <span>Pause</span>
-                </>
-              ) : (
-                <>
-                  <Headphones className="h-3.5 w-3.5" />
-                  <span>Listen</span>
-                </>
-              )}
-            </button>
+          {/* Read Column Action Button */}
+          <button
+            onClick={handleOpenReader}
+            aria-label="Read full column"
+            className="btn-press-3d flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-[#0A0A0A] dark:bg-[#E6AF2E] text-white dark:text-[#0B0C0E] font-kicker text-xs font-semibold uppercase tracking-wider border-b-[3px] border-b-black/80 dark:border-b-[#C5911B] shadow-sm hover:bg-[#262626] dark:hover:bg-[#F3C760] transition-all"
+          >
+            <BookOpen className="h-3.5 w-3.5" />
+            <span>Read Column</span>
+          </button>
 
-            {/* Add to Queue */}
-            <button
-              onClick={handleQueue}
-              aria-label="Queue for broadsheet narration"
-              className="btn-press-3d p-1.5 rounded-lg bg-white dark:bg-[#1D2025] text-[#0A0A0A] dark:text-[#F5F5F0] border border-[#D5CFBE] dark:border-[#2A2E35] border-b-[3px] border-b-[#B4ACA0] dark:border-b-black hover:text-[#B45309] dark:hover:text-[#E6AF2E] transition-colors"
-              title="Queue dispatch"
-            >
-              <Plus className="h-3.5 w-3.5" />
-            </button>
-          </div>
-
-          <div className="flex items-center gap-2">
-            {/* Read Column Action */}
-            <span className="text-[11px] font-kicker uppercase tracking-[0.08em] font-semibold text-[#B45309] dark:text-[#E6AF2E] group-hover:underline flex items-center gap-1">
-              <BookOpen className="h-3.5 w-3.5" />
-              <span>Read Column</span>
-            </span>
-
-            {/* Bookmark Toggle */}
-            <button
-              onClick={handleBookmark}
-              aria-label="Save bookmark"
-              className={`btn-press-3d p-1.5 rounded-lg border border-b-[3px] transition-colors ${
-                article.isBookmarked
-                  ? 'text-[#B45309] dark:text-[#E6AF2E] bg-[#E6AF2E]/15 border-[#B45309]/40 dark:border-[#E6AF2E]/40 border-b-[#B45309] dark:border-b-[#E6AF2E]'
-                  : 'text-[#4A4A4A] dark:text-[#9EA3A0] bg-white dark:bg-[#1D2025] border border-[#D5CFBE] dark:border-[#2A2E35] border-b-[#B4ACA0] dark:border-b-black hover:text-[#0A0A0A] dark:hover:text-[#F5F5F0]'
-              }`}
-              title={article.isBookmarked ? 'Bookmarked' : 'Bookmark story'}
-            >
-              <Bookmark className={`h-3.5 w-3.5 ${article.isBookmarked ? 'fill-current' : ''}`} />
-            </button>
-          </div>
+          {/* Bookmark Ribbon Toggle */}
+          <button
+            onClick={handleBookmark}
+            aria-label="Save bookmark"
+            className={`btn-press-3d p-2 rounded-lg border border-b-[3px] transition-colors ${
+              article.isBookmarked
+                ? 'text-[#B45309] dark:text-[#E6AF2E] bg-[#E6AF2E]/15 border-[#B45309]/40 dark:border-[#E6AF2E]/40 border-b-[#B45309] dark:border-b-[#E6AF2E]'
+                : 'text-[#4A4A4A] dark:text-[#9EA3A0] bg-white dark:bg-[#1D2025] border border-[#D5CFBE] dark:border-[#2A2E35] border-b-[#B4ACA0] dark:border-b-black hover:text-[#0A0A0A] dark:hover:text-[#F5F5F0]'
+            }`}
+            title={article.isBookmarked ? 'Bookmarked' : 'Bookmark story'}
+          >
+            <Bookmark className={`h-4 w-4 ${article.isBookmarked ? 'fill-current' : ''}`} />
+          </button>
         </div>
       </div>
     </article>

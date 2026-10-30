@@ -67,7 +67,7 @@ const DISCOVERY_GRAPH: CoSubscriptionEdge[] = [
 
 // Ephemeral rate limiting cache based on salted IP hashes
 const submissionRateLimit = new Map<string, number>();
-const SALT = process.env.DISCOVERY_IP_SALT || 'feedora_privacy_salt_2026';
+const SALT = process.env.DISCOVERY_IP_SALT || 'incogniread_privacy_salt_2026';
 
 function hashIp(ip: string): string {
   return crypto.createHash('sha256').update(ip + SALT).digest('hex').substring(0, 16);
