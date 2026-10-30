@@ -1,0 +1,272 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, ::before, ::after {
+    box-sizing: border-box;
+  }
+
+  :root {
+    /* Light Theme ("Aged Broadsheet Edition") */
+    --color-canvas: #F4F1EA;
+    --color-surface: #FFFFFF;
+    --color-surface-elevated: #ECE8DF;
+    --color-border: #D5CFBE;
+    --color-divider: #1E1E1E;
+
+    --ink-hard: #0A0A0A;
+    --ink-secondary: #262626;
+    --ink-tertiary: #4A4A4A;
+    --ink-muted: #4A4A4A;
+
+    --accent-brass: #E6AF2E;
+    --accent-linotype: #38D489;
+    --accent-sepia: #B45309;
+
+    --font-headline: 'Newsreader', 'Playfair Display', Georgia, serif;
+    --font-body: 'Spectral', 'Merriweather', 'Lora', Georgia, serif;
+    --font-kicker: 'Cinzel', 'Inter', system-ui, sans-serif;
+    --font-ui: 'Inter', 'Plus Jakarta Sans', system-ui, sans-serif;
+    --font-masthead: 'Cinzel', 'Newsreader', Georgia, serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  .dark {
+    /* Dark Theme ("Midnight Press Edition") */
+    --color-canvas: #0B0C0E;
+    --color-surface: #141619;
+    --color-surface-elevated: #1D2025;
+    --color-border: #2A2E35;
+    --color-divider: #363B44;
+
+    --ink-hard: #F5F5F0;
+    --ink-secondary: #C8CCC5;
+    --ink-tertiary: #9EA3A0;
+    --ink-muted: #9EA3A0;
+
+    --accent-brass: #E6AF2E;
+    --accent-linotype: #38D489;
+    --accent-sepia: #D97706;
+  }
+
+  /* Dynamic font pairings */
+  .font-pair-broadsheet {
+    --font-headline: 'Newsreader', 'Playfair Display', Georgia, serif;
+    --font-body: 'Spectral', 'Lora', Georgia, serif;
+    --font-ui: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-masthead: 'Cinzel', 'Newsreader', Georgia, serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  .font-pair-modern {
+    --font-headline: 'Newsreader', 'Playfair Display', Georgia, serif;
+    --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-ui: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-masthead: 'Playfair Display', Georgia, serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  .font-pair-heritage {
+    --font-headline: 'Playfair Display', Georgia, serif;
+    --font-body: 'Merriweather', Georgia, serif;
+    --font-ui: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-masthead: 'Cinzel', 'Playfair Display', Georgia, serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  .font-pair-grotesque {
+    --font-headline: 'Cinzel', 'Playfair Display', Georgia, serif;
+    --font-body: 'Spectral', 'Inter', system-ui, -apple-system, sans-serif;
+    --font-ui: 'JetBrains Mono', monospace;
+    --font-masthead: 'Cinzel', Georgia, serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-feature-settings: "liga" 1, "dlig" 1, "kern" 1;
+    -webkit-tap-highlight-color: transparent;
+    font-family: var(--font-body);
+    background-color: var(--color-canvas);
+    color: var(--ink-hard);
+  }
+
+  /* Global smooth transitions for theme switches */
+  body, header, nav, main, aside, footer, article, section, div, button, input {
+    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  }
+
+  :focus-visible {
+    outline: 2px solid #E6AF2E;
+    outline-offset: 2px;
+  }
+}
+
+/* 1. Professional Editorial Typography Stack */
+.editorial-headline,
+.font-headline {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-optical-sizing: auto;
+  letter-spacing: -0.02em;
+}
+
+.editorial-kicker,
+.font-kicker {
+  font-family: var(--font-kicker, 'Cinzel', 'Inter', sans-serif);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.editorial-body,
+.font-body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.85;
+  letter-spacing: 0.01em;
+}
+
+.editorial-mono,
+.font-mono {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Editorial Drop Caps */
+.drop-cap::first-letter {
+  float: left;
+  font-family: 'Playfair Display', 'Newsreader', Georgia, serif;
+  font-size: 3.6rem;
+  line-height: 0.8;
+  margin-right: 0.75rem;
+  margin-top: 0.2rem;
+  font-weight: 700;
+  color: #0A0A0A;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.06);
+}
+
+.dark .drop-cap::first-letter {
+  color: #E6AF2E;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+/* Editorial Formal Double Rule */
+.editorial-double-rule {
+  border-top: 2px solid currentColor;
+  position: relative;
+  margin: 0.75rem 0;
+}
+.editorial-double-rule::after {
+  content: '';
+  display: block;
+  border-top: 1px solid currentColor;
+  margin-top: 2px;
+}
+
+/* Hairline dividers */
+.border-hairline {
+  border-color: #D5CFBE;
+}
+.dark .border-hairline {
+  border-color: #2A2E35;
+}
+
+.border-divider-hard {
+  border-color: #1E1E1E;
+}
+.dark .border-divider-hard {
+  border-color: #363B44;
+}
+
+/* 3D Tactile Newspaper Press Buttons */
+.btn-press-3d {
+  position: relative;
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background-color 0.15s ease, border-color 0.15s ease;
+  border-bottom-width: 3px !important;
+}
+.btn-press-3d:active {
+  transform: translateY(2px);
+  border-bottom-width: 1px !important;
+}
+
+/* Subtle Paper Texture Background */
+.paper-texture {
+  background-image: radial-gradient(rgba(10, 10, 10, 0.04) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+.dark .paper-texture {
+  background-image: radial-gradient(rgba(245, 245, 240, 0.03) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* Reading Sentence Highlighter */
+.reading-sentence-glow {
+  background-color: rgba(230, 175, 46, 0.35);
+  box-shadow: 0 0 12px rgba(230, 175, 46, 0.25);
+  border-radius: 4px;
+  padding: 2px 4px;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+.dark .reading-sentence-glow {
+  background-color: rgba(230, 175, 46, 0.28);
+  box-shadow: 0 0 12px rgba(230, 175, 46, 0.2);
+}
+
+/* Custom Editorial Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F4F1EA;
+}
+.dark ::-webkit-scrollbar-track {
+  background: #0B0C0E;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D5CFBE;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #B4ACA0;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #2A2E35;
+  border-radius: 4px;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #3E444F;
+}
+
+/* Marquee Telegraph Ticker */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
